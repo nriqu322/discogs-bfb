@@ -16,11 +16,11 @@ const ArtistList = () => {
           toast.error(response.error);
         } else {
           console.log(response);
-          setArtistListArray({artistListArray,...response.results});
+          setArtistListArray(response.results);
           dispatch(getArtistList(response.results))
         }
     })
-  }, [artistListArray, dispatch])
+  }, [dispatch])
 
   console.log(artistListArray)
   console.log(artistListArray[0])
@@ -37,7 +37,7 @@ const ArtistList = () => {
             year={card.year}
             card={card}
           />
-      ))) : <div>Nothing selected</div>}
+      ))) : <div>Loading</div>}
     </div>
   )
 }

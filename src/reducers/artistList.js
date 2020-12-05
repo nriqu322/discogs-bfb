@@ -8,9 +8,15 @@ const initialState = {
 const artistListReducer = (state = initialState, action) => {
   switch(action.type) {
     case GET_ARTIST_LIST:
-      return [...state, action.artistList];
+      return {
+        ...state,
+        ...action.artistList,
+      };
     case SET_CURRENT_CARD:
-      return [...state, action.currentCard]
+      return {
+        ...state,
+        ...action.currentCard,
+      }
     default:
       return state;
   }

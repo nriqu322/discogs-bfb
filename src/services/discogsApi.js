@@ -5,7 +5,7 @@ const api = {
 
 async function getArtist(artist, track) {
   try {
-    const response = await fetch(`${api.baseUrl}token=${api.token}&artist=${artist}&track=${track}`);
+    const response = await fetch(`${api.baseUrl}token=${api.token}&artist=${artist}&track=${track}&per_page=25`);
     const data = await response.json();
     return data;
   } catch (e) {
