@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { getArtistList } from '../actions';
 import { toast } from 'react-toastify';
 import discogsApi from '../services/discogsApi';
@@ -7,28 +7,29 @@ import ArtistCard from '../components/ArtistCard';
 
 const ArtistList = () => {
   const dispatch = useDispatch();
-  let [artistListArray, setArtistListArray] = useState([]);
+  const artistList = useSelector(state => state.artistList.artistList)
+
+  console.log(artistList);
 
   useEffect(() => {
-    discogsApi('nirvana', 'nevermind')
-      .then(response => {
-        if (response.error) {
-          toast.error(response.error);
-        } else {
-          console.log(response);
-          setArtistListArray(response.results);
-          dispatch(getArtistList(response.results))
-        }
-    })
-  }, [dispatch])
+    if (artistList && artistList.length === 0 ) {
+      discogsApi('nirvana', 'nevermind')
+        .then(response => {
+          if (response.error) {
+            toast.error(response.error);
+          } else {
+            dispatch(getArtistList(response.results))
+          }
+        })
+    }
+  }, [artistList, dispatch])
 
-  console.log(artistListArray)
-  console.log(artistListArray[0])
+  // console.log(artistList)
 
   return (
     <div>
-      {artistListArray && artistListArray.length !== 0 ? (
-        artistListArray.map(card => (
+      {artistList && artistList.length !== 0 ? (
+        artistList.map(card => (
           <ArtistCard
             key={card.id}
             id={card.id}

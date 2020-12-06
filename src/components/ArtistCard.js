@@ -35,7 +35,7 @@ ArtistCard.propTypes = {
   card: PropTypes.objectOf(PropTypes.any).isRequired,
   title: PropTypes.string.isRequired,
   thumb: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
+  year: PropTypes.string,
   setCurrentCard: PropTypes.func.isRequired,
 }
 
