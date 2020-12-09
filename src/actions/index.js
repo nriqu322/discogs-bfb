@@ -4,6 +4,8 @@ const SET_PAGINATION = 'SET_PAGINATION'
 const SET_ARTIST_PARAM = 'SET_ARTIST_PARAM'
 const SET_TRACK_PARAM = 'SET_TRACK_PARAM'
 
+const SET_MODAL = 'SET_MODAL';
+
 const getArtistList = artistList => ({
   type: GET_ARTIST_LIST,
   artistList,
@@ -29,7 +31,12 @@ const setTrackParam = track => ({
   track,
 })
 
+const setModal = modal => ({
+  type: SET_MODAL,
+  modal,
+})
+
 export {
-  GET_ARTIST_LIST, SET_CURRENT_CARD, SET_PAGINATION, SET_ARTIST_PARAM, SET_TRACK_PARAM,
-  getArtistList, setCurrentCard, setPagination, setArtistParam, setTrackParam,
+  GET_ARTIST_LIST, SET_CURRENT_CARD, SET_PAGINATION, SET_ARTIST_PARAM, SET_TRACK_PARAM, SET_MODAL,
+  getArtistList, setCurrentCard, setPagination, setArtistParam, setTrackParam, setModal,
 };

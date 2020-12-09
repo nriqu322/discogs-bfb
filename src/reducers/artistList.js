@@ -2,7 +2,7 @@ import { GET_ARTIST_LIST, SET_CURRENT_CARD } from '../actions';
 
 const initialState = {
   artistList: [],
-  currentCard: null,
+  currentCard: [],
 };
 
 const artistListReducer = (state = initialState, action) => {

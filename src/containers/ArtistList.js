@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { discogsApi, updateApi } from '../services/discogsApi';
 import ArtistCard from '../components/ArtistCard';
 import ReactPaginate from 'react-paginate';
+import Details from '../components/Details';
 
 const ArtistList = () => {
   const dispatch = useDispatch();
@@ -76,6 +77,7 @@ const ArtistList = () => {
             />
         ))) : <div>Loading</div>}
       </div>
+      <Details />
     </div>
   )
 }
