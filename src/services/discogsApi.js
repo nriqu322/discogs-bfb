@@ -3,9 +3,9 @@ const api = {
   token: 'nGdchFugBWScUGbCVArCHdDLDmVkuilYFNhywdaS',
 };
 
-async function getArtist(artist, track) {
+async function discogsApi(artist, track) {
   try {
-    const response = await fetch(`${api.baseUrl}token=${api.token}&artist=${artist}&track=${track}&per_page=25`);
+    const response = await fetch(`${api.baseUrl}token=${api.token}&artist=${artist}&track=${track}`);
     const data = await response.json();
     return data;
   } catch (e) {
@@ -15,4 +15,16 @@ async function getArtist(artist, track) {
   }
 }
 
-export default getArtist;
+async function updateApi(artist, track, page) {
+  try {
+    const response = await fetch(`${api.baseUrl}token=${api.token}&artist=${artist}&track=${track}&page=${page}`);
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    return {
+      error: e.message,
+    };
+  }
+}
+
+export { discogsApi, updateApi };

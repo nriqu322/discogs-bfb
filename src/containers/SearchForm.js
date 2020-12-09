@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getArtistList } from '../actions';
+import { getArtistList, setPagination, setArtistParam, setTrackParam } from '../actions';
 import { toast } from 'react-toastify';
-import discogsApi from '../services/discogsApi';
+import { discogsApi } from '../services/discogsApi';
 
 toast.configure();
 const SearchForm = () => {
   const [artist, setArtist] = useState('');
   const [track, setTrack] = useState('');
+  // const dataPagination = useSelector(state => state.dataPagination)
 
   const dispatch = useDispatch();
 
@@ -27,7 +28,10 @@ const SearchForm = () => {
         toast.warn('No results found');
       } else {
         console.log(response);
+        dispatch(setPagination(response.pagination));
         dispatch(getArtistList(response.results));
+        dispatch(setArtistParam({artist}));
+        dispatch(setTrackParam({track}));
       }
     })
   }
