@@ -4,19 +4,15 @@ import { setModal } from '../actions/index';
 import { Modal, Button } from 'antd';
 import 'antd/dist/antd.css';
 
-const Details = props => {
-  const { trackList } = props; 
+const Details = () => {
   const modal = useSelector(state => state.modal.modal);
   const currentCard = useSelector(state => state.artistList.currentCard);
+  const trackList = useSelector(state => state.artistList.trackList);
   const dispatch = useDispatch();
-
-  // const trackList = useSelector(state => state.artistList.trackList);
 
   const handleCancel = () => {
     dispatch(setModal(false));
   };
-
-  console.log(trackList);
 
   return (
     <Modal
