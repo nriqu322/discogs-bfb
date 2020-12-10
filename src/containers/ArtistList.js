@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getArtistList, setPagination } from '../actions';
 import { toast } from 'react-toastify';
 import { discogsApi, updateApi } from '../services/discogsApi';
 import ArtistCard from '../components/ArtistCard';
 import ReactPaginate from 'react-paginate';
+import Details from '../components/Details';
 
+toast.configure();
 const ArtistList = () => {
   const dispatch = useDispatch();
-  const [offset, setOffset] = useState(0);
   const artistList = useSelector(state => state.artistList.artistList)
   const artist = useSelector(state => state.setParams.artist)
   const track = useSelector(state => state.setParams.track)
@@ -21,13 +22,13 @@ const ArtistList = () => {
           if (response.error) {
             toast.error(response.error);
           } else {
-            console.log(response);
+            console.log(response.results);
             dispatch(setPagination(response.pagination));
             dispatch(getArtistList(response.results));
           }
         })
     }
-  }, [offset, artistList, dispatch])
+  }, [artistList, dispatch])
 
   const updateList = (artist, track, page) => {
     updateApi(artist, track, page)
@@ -35,8 +36,6 @@ const ArtistList = () => {
         if (response.error) {
           toast.error(response.error);
         } else {
-          console.log(page)
-          console.log(response.pagination)
           dispatch(getArtistList(response.results))
         }
       })
@@ -44,8 +43,6 @@ const ArtistList = () => {
 
   const handlePageClick = (e) => {
     const selectedPage = e.selected;
-    setOffset(selectedPage + 1)
-
     updateList(artist, track, selectedPage + 1)
   };
 
@@ -76,6 +73,7 @@ const ArtistList = () => {
             />
         ))) : <div>Loading</div>}
       </div>
+      <Details />
     </div>
   )
 }

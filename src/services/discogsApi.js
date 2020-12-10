@@ -27,4 +27,16 @@ async function updateApi(artist, track, page) {
   }
 }
 
-export { discogsApi, updateApi };
+async function trackListApi(url) {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    return {
+      error: e.message,
+    };
+  }
+}
+
+export { discogsApi, updateApi, trackListApi };

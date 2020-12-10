@@ -11,7 +11,6 @@ const App = () => (
         <SearchForm />
         <ArtistList />
       </Route>
-      <Route path="/details/:id"/>
     </Switch>
   </Router>
 );

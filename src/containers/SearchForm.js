@@ -8,7 +8,6 @@ toast.configure();
 const SearchForm = () => {
   const [artist, setArtist] = useState('');
   const [track, setTrack] = useState('');
-  // const dataPagination = useSelector(state => state.dataPagination)
 
   const dispatch = useDispatch();
 
