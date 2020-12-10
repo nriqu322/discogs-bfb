@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 const ArtistCard = props => {
   const { id, thumb, title, year, card } = props;
   const dispatch = useDispatch();
+  let trackList = [];
 
   const handleClick = () => {
     dispatch(setCurrentCard(card));
@@ -17,12 +18,15 @@ const ArtistCard = props => {
       dispatch(setModal(true));
     } else {
       trackListApi(card.master_url)
-      .then(response => {
-        if (response.error) {
-          toast.error(response.error);
-          dispatch(setModal(true));
-        }
-      })
+        .then(response => {
+          if (response.error) {
+            toast.error(response.error);
+          } else {
+            response.tracklist.map(track => trackList.push(track.title));
+            dispatch(setTrackList(trackList));
+            dispatch(setModal(true));
+          }
+        })
     }
   }
 
