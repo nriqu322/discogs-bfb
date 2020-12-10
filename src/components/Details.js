@@ -41,7 +41,7 @@ const Details = props => {
           <p>Style: {currentCard.style}</p>
           <br></br>
           <h2>Tracklist</h2>
-          {trackList.map((track, index) => <p key={track}>{index + 1}. {track}</p>)}
+          {trackList && trackList.map((track, index) => <p key={track}>{index + 1}. {track}</p>)}
         </div>
       )
       }

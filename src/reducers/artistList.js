@@ -3,10 +3,9 @@ import { GET_ARTIST_LIST, SET_CURRENT_CARD } from '../actions';
 const initialState = {
   artistList: [],
   currentCard: [],
-  trackList: [],
 };
 
-const trackListReducer = (state = initialState, action) => {
+const artistListReducer = (state = initialState, action) => {
   switch(action.type) {
     case GET_ARTIST_LIST:
       return {
@@ -18,14 +17,9 @@ const trackListReducer = (state = initialState, action) => {
         ...state,
         currentCard: action.currentCard,
       };
-    // case SET_TRACKLIST:
-    //   return {
-    //     ...state,
-    //     trackList: action.trackList,
-    //   }
     default:
       return state;
   }
 }
 
-export default trackListReducer;
+export default artistListReducer;
