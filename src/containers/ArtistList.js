@@ -6,6 +6,11 @@ import { discogsApi, updateApi } from '../services/discogsApi';
 import ArtistCard from '../components/ArtistCard';
 import ReactPaginate from 'react-paginate';
 import Details from '../components/Details';
+import { Layout, Breadcrumb } from 'antd';
+import { Row, Col, Divider } from 'antd';
+
+const { Content } = Layout;
+const style = { background: '#0092ff', padding: '8px 0' };
 
 toast.configure();
 const ArtistList = () => {
@@ -47,20 +52,27 @@ const ArtistList = () => {
   };
 
   return (
-    <div>
-      <ReactPaginate
-        previousLabel={"prev"}
-        nextLabel={"next"}
-        breakLabel={"..."}
-        breakClassName={"break-me"}
-        pageCount={dataPagination.pages}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={4}
-        onPageChange={handlePageClick}
-        containerClassName={"pagination"}
-        subContainerClassName={"pages pagination"}
-        activeClassName={"active"} />
-      <div>
+    <Layout className="layout">
+      <Content style={{ padding: '0 50px' }}>
+      <Breadcrumb style={{ margin: '16px 0' }}>
+        <Breadcrumb.Item>
+          <ReactPaginate
+            previousLabel={"prev"}
+            nextLabel={"next"}
+            breakLabel={"..."}
+            breakClassName={"break-me"}
+            pageCount={dataPagination.pages}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={4}
+            onPageChange={handlePageClick}
+            containerClassName={"pagination"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"} />
+        </Breadcrumb.Item>
+      </Breadcrumb>
+      </Content>
+      <Row className="site-layout-content" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+        <Divider orientation="left">Albums</Divider>
         {artistList && artistList.length !== 0 ? (
           artistList.map(card => (
             <ArtistCard
@@ -72,9 +84,9 @@ const ArtistList = () => {
               card={card}
             />
         ))) : <div>Loading</div>}
-      </div>
+      </Row>
       <Details />
-    </div>
+    </Layout>
   )
 }
 
