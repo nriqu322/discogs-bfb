@@ -6,7 +6,6 @@ import { discogsApi, updateApi } from '../services/discogsApi';
 import ArtistCard from '../components/ArtistCard';
 import ReactPaginate from 'react-paginate';
 import Details from '../components/Details';
-
 import { trackListApi } from '../services/discogsApi';
 
 toast.configure();
@@ -19,7 +18,6 @@ const ArtistList = () => {
 
   let trackList = [];
   const currentCard = useSelector(state => state.artistList.currentCard);
-  // const trackList = useSelector(state => state.artistList.trackList);
 
   useEffect(() => {
     if (artistList && artistList.length === 0 ) {
