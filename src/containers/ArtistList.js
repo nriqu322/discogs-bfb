@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getArtistList, setPagination } from '../actions';
 import { toast } from 'react-toastify';
@@ -7,13 +7,19 @@ import ArtistCard from '../components/ArtistCard';
 import ReactPaginate from 'react-paginate';
 import Details from '../components/Details';
 
+import { trackListApi } from '../services/discogsApi';
+
+toast.configure();
 const ArtistList = () => {
   const dispatch = useDispatch();
-  const [offset, setOffset] = useState(0);
   const artistList = useSelector(state => state.artistList.artistList)
   const artist = useSelector(state => state.setParams.artist)
   const track = useSelector(state => state.setParams.track)
   const dataPagination = useSelector(state => state.dataPagination)
+
+  let trackList = [];
+  const currentCard = useSelector(state => state.artistList.currentCard);
+  // const trackList = useSelector(state => state.artistList.trackList);
 
   useEffect(() => {
     if (artistList && artistList.length === 0 ) {
@@ -22,13 +28,13 @@ const ArtistList = () => {
           if (response.error) {
             toast.error(response.error);
           } else {
-            console.log(response);
+            console.log(response.results);
             dispatch(setPagination(response.pagination));
             dispatch(getArtistList(response.results));
           }
         })
     }
-  }, [offset, artistList, dispatch])
+  }, [artistList, dispatch])
 
   const updateList = (artist, track, page) => {
     updateApi(artist, track, page)
@@ -36,17 +42,24 @@ const ArtistList = () => {
         if (response.error) {
           toast.error(response.error);
         } else {
-          console.log(page)
-          console.log(response.pagination)
           dispatch(getArtistList(response.results))
         }
       })
   }
 
+  if (currentCard.length !== 0) {
+    trackListApi(currentCard.master_url)
+    .then(response => {
+      if (response.error) {
+        toast.error(response.error);
+      } else {
+        response.tracklist.map(track => trackList.push(track.title));
+      }
+    })
+  }
+
   const handlePageClick = (e) => {
     const selectedPage = e.selected;
-    setOffset(selectedPage + 1)
-
     updateList(artist, track, selectedPage + 1)
   };
 
@@ -77,7 +90,7 @@ const ArtistList = () => {
             />
         ))) : <div>Loading</div>}
       </div>
-      <Details />
+      <Details trackList={trackList} />
     </div>
   )
 }

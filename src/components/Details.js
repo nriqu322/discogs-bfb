@@ -4,14 +4,19 @@ import { setModal } from '../actions/index';
 import { Modal, Button } from 'antd';
 import 'antd/dist/antd.css';
 
-const Details = () => {
+const Details = props => {
+  const { trackList } = props; 
   const modal = useSelector(state => state.modal.modal);
   const currentCard = useSelector(state => state.artistList.currentCard);
   const dispatch = useDispatch();
 
+  // const trackList = useSelector(state => state.artistList.trackList);
+
   const handleCancel = () => {
     dispatch(setModal(false));
   };
+
+  console.log(trackList);
 
   return (
     <Modal
@@ -34,6 +39,9 @@ const Details = () => {
           <p>Country: {currentCard.country}</p>
           <p>Style: {currentCard.genre}</p>
           <p>Style: {currentCard.style}</p>
+          <br></br>
+          <h2>Tracklist</h2>
+          {trackList.map((track, index) => <p key={track}>{index + 1}. {track}</p>)}
         </div>
       )
       }
