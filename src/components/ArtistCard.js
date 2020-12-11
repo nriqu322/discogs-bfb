@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setCurrentCard, setModal, setTrackList } from '../actions/index';
 import { trackListApi } from '../services/discogsApi';
 import { toast } from 'react-toastify';
+import {Card, Col } from 'react-bootstrap';
 
 const ArtistCard = props => {
   const { id, thumb, title, year, card } = props;
@@ -31,15 +32,15 @@ const ArtistCard = props => {
   }
 
   return (
-    <>
-      <div className="card-element" onClick={handleClick}>
-        <div className="card-container" id={id}>
-          <img className="card-image" src={thumb} alt="thumbnail" />
-          <div className="card-title">{title}</div>
-          <div className="card-year">{year}</div>
-        </div>
-      </div>
-    </>
+    <Col className="card-element mt-3" onClick={handleClick}>
+      <Card style={{ width: '12rem' }} className="card-container" id={id}>
+        <Card.Img variant="top" src={thumb} alt="thumbnail" style={{ width: '192px', height: '180px'}}/>
+        <Card.Body>
+          <Card.Title>{title}</Card.Title>
+          <Card.Text>{year}</Card.Text>
+        </Card.Body>
+      </Card>
+    </Col>
   )
 };
 

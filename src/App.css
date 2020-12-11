@@ -1,38 +1,115 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
+  max-width: 768px;
+  margin: auto;
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header {
+  background-color: rgb(7, 7, 49);
+  height: 55px;
+  margin-bottom: 25px;
+}
+
+.header-img {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  padding-top: 8px;
+}
+
+.main-content {
+  max-width: 97%;
+  margin: 30px auto;
+}
+
+.pagination {
+  margin: 15px auto;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  outline: none;
+}
+.pagination > .active > a{
+  background-color: #47ccde ;
+  border-color: #47ccde ;
+  color: #fff;
+}
+.pagination > li > a{
+  border: 1px solid #47ccde ;
+  padding: 5px 10px;
+  outline: none;
+  cursor: pointer;
+}
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+  background-color: #47ccde ;
+  border-color: #47ccde;
+  outline: none ;
+}
+.pagination > li > a, .pagination > li > span{
+  color: #47ccde
+}
+.pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
+  border-radius: unset
+}
+
+.search-form {
+  max-width: 768px;
+  margin: auto;
+}
+
+.disabled {
+  color: lightgray;
+}
+
+.container-details {
+  display: flex;
+  flex-direction: row;
+}
+
+.card-container {
+  margin: auto;
+}
+
+.card-img {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.card-text {
+  margin-bottom: 8px;
+}
+
+.row-content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.main-load {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 70px;
+}
+
+.card-elemet {
+  width: 100%;
+}
+
+.footer {
+  color: rgb(122, 120, 120);
+  background-color: rgb(240, 239, 239);
+  text-align: center;
+  height: 50px;
+  margin: 20px 0;
+  padding-top: 10px;
 }
