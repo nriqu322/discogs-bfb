@@ -13,9 +13,13 @@
 }
 
 .header {
+  position: fixed;
+  z-index: 999;
   background-color: rgb(7, 7, 49);
   height: 55px;
+  top: 0;
   margin-bottom: 25px;
+  width: 100%;
 }
 
 .header-img {
@@ -63,6 +67,7 @@
 .search-form {
   max-width: 768px;
   margin: auto;
+  margin-top: 75px;
 }
 
 .disabled {
@@ -106,10 +111,13 @@
 }
 
 .footer {
-  color: rgb(122, 120, 120);
-  background-color: rgb(240, 239, 239);
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  color: rgb(92, 89, 89);
+  font-size: 14px;
+  background-color: rgb(219, 217, 217);
   text-align: center;
-  height: 50px;
-  margin: 20px 0;
-  padding-top: 10px;
+  height: 33px;
+  padding-top: 5px;
 }
