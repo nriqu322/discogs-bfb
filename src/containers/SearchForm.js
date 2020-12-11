@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { getArtistList, setPagination, setArtistParam, setTrackParam } from '../actions';
 import { toast } from 'react-toastify';
 import { discogsApi } from '../services/discogsApi';
+import { Form, Col, Button } from 'react-bootstrap';
 
 toast.configure();
 const SearchForm = () => {
@@ -22,11 +23,13 @@ const SearchForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (artist === '' && track === '') {
+      return 
+    }
     discogsApi(artist, track).then(response => {
       if (response.error) {
         toast.warn('No results found');
       } else {
-        console.log(response);
         dispatch(setPagination(response.pagination));
         dispatch(getArtistList(response.results));
         dispatch(setArtistParam({artist}));
@@ -36,15 +39,17 @@ const SearchForm = () => {
   }
 
   return (
-    <form className="search-form " onSubmit={handleSubmit}>
-      <label htmlFor="artist">
-        <input id="artist-input" type="text" onChange={handleChange} placeholder="artist" />
-      </label>
-      <label htmlFor="track">
-        <input id="track-input" type="text" onChange={handleChange} placeholder="track" />
-      </label>
-      <input className="submit-btn" type="submit" value="Search" />
-    </form>
+    <Form className="search-form" onSubmit={handleSubmit}>
+      <Form.Row>
+        <Col>
+          <Form.Control id="artist-input" type="text" onChange={handleChange} placeholder="Artist" />
+        </Col>
+        <Col>
+          <Form.Control id="track-input" type="text" onChange={handleChange} placeholder="Track" />
+        </Col>
+        <Button variant="primary" type="submit">Search</Button>
+      </Form.Row>
+    </Form>
   );
 }
 
