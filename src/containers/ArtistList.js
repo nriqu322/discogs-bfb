@@ -6,6 +6,7 @@ import { discogsApi, updateApi } from '../services/discogsApi';
 import ArtistCard from '../components/ArtistCard';
 import ReactPaginate from 'react-paginate';
 import Details from '../components/Details';
+import { Container, Row, Spinner } from 'react-bootstrap';
 
 toast.configure();
 const ArtistList = () => {
@@ -47,7 +48,7 @@ const ArtistList = () => {
   };
 
   return (
-    <div>
+    <div className="main-content">
       <ReactPaginate
         previousLabel={"prev"}
         nextLabel={"next"}
@@ -60,19 +61,21 @@ const ArtistList = () => {
         containerClassName={"pagination"}
         subContainerClassName={"pages pagination"}
         activeClassName={"active"} />
-      <div>
-        {artistList && artistList.length !== 0 ? (
-          artistList.map(card => (
-            <ArtistCard
-              key={card.id}
-              id={card.id}
-              thumb={card.thumb}
-              title={card.title}
-              year={card.year}
-              card={card}
-            />
-        ))) : <div>Loading</div>}
-      </div>
+      <Container>
+        <Row className="row-content" xs={1} sm={2} md={3} lg={4} xl={5}>
+          {artistList && artistList.length !== 0 ? (
+            artistList.map(card => (
+              <ArtistCard
+                key={card.id}
+                id={card.id}
+                thumb={card.thumb}
+                title={card.title}
+                year={card.year}
+                card={card}
+              />
+          ))) : <div className="main-load"><Spinner className="load-spinner" animation="grow" variant="dark" /></div>}
+        </Row>
+      </Container>
       <Details />
     </div>
   )
