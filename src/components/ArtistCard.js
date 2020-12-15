@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentCard, setModal, setTrackList } from '../actions/index';
 import { trackListApi } from '../services/discogsApi';
 import { toast } from 'react-toastify';
@@ -11,24 +11,36 @@ const ArtistCard = props => {
   const dispatch = useDispatch();
   let trackList = [];
 
-  const handleClick = () => {
-    dispatch(setCurrentCard(card));
+  const currentCard = useSelector(state => state.artistList.currentCard);
 
-    if (card.master_url === null) {
-      dispatch(setTrackList(['--No Tracklist--']));
-      dispatch(setModal(true));
+  const handleClick = () => {
+    if (card !== currentCard) {
+      dispatch(setCurrentCard(card));
+
+      if (card.master_url === null) {
+        if (trackList[0] !== '--No Tracklist--') {
+          dispatch(setTrackList(['--No Tracklist--']));
+        }
+        dispatch(setModal(true));
+      } else {
+        if (card !== currentCard) {
+          trackListApi(card.master_url)
+          .then(response => {
+            if (response.error) {
+              toast.error(response.error);
+            } else {
+                response.tracklist.map(track => trackList.push(track.title));
+                dispatch(setTrackList(trackList));
+              dispatch(setModal(true));
+            }
+          })
+        }
+      }
     } else {
-      trackListApi(card.master_url)
-        .then(response => {
-          if (response.error) {
-            toast.error(response.error);
-          } else {
-            response.tracklist.map(track => trackList.push(track.title));
-            dispatch(setTrackList(trackList));
-            dispatch(setModal(true));
-          }
-        })
+      dispatch(setModal(true));
     }
+
+
   }
 
   return (

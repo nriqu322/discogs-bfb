@@ -34,6 +34,8 @@ const SearchForm = () => {
         dispatch(getArtistList(response.results));
         dispatch(setArtistParam({artist}));
         dispatch(setTrackParam({track}));
+        setTrack('');
+        setArtist('');
       }
     })
   }
@@ -42,10 +44,10 @@ const SearchForm = () => {
     <Form className="search-form" onSubmit={handleSubmit}>
       <Form.Row>
         <Col>
-          <Form.Control id="artist-input" type="text" onChange={handleChange} placeholder="Artist" />
+          <Form.Control value={artist} id="artist-input" type="text" onChange={handleChange} placeholder="Artist" />
         </Col>
         <Col>
-          <Form.Control id="track-input" type="text" onChange={handleChange} placeholder="Track" />
+          <Form.Control value={track} id="track-input" type="text" onChange={handleChange} placeholder="Track" />
         </Col>
         <Button variant="primary" type="submit">Search</Button>
       </Form.Row>

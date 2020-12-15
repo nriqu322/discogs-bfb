@@ -11,10 +11,12 @@ import { Container, Row, Spinner } from 'react-bootstrap';
 toast.configure();
 const ArtistList = () => {
   const dispatch = useDispatch();
-  const artistList = useSelector(state => state.artistList.artistList)
-  const artist = useSelector(state => state.setParams.artist)
-  const track = useSelector(state => state.setParams.track)
-  const dataPagination = useSelector(state => state.dataPagination)
+  const artistList = useSelector(state => state.artistList.artistList);
+  const artist = useSelector(state => state.setParams.artist);
+  const track = useSelector(state => state.setParams.track);
+  const dataPagination = useSelector(state => state.dataPagination);
+
+  // const currentCard = useSelector(state => state.artistList.currentCard);
 
   useEffect(() => {
     if (artistList && artistList.length === 0 ) {
@@ -23,7 +25,6 @@ const ArtistList = () => {
           if (response.error) {
             toast.error(response.error);
           } else {
-            console.log(response.results);
             dispatch(setPagination(response.pagination));
             dispatch(getArtistList(response.results));
           }

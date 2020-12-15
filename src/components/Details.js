@@ -32,12 +32,30 @@ const Details = () => {
           <Card className="container-details d-flex flex-sm-row">
             <Card.Img className="card-img ml-2" src={currentCard.cover_image} alt="artist-cover" style={{ width: '192px', height: '180px'}} />
             <Card.Body>
-              <Card.Text><span className="font-weight-bold">Type:</span> {currentCard.type}</Card.Text>
-              <Card.Text><span className="font-weight-bold">Label:</span> {currentCard.label}</Card.Text>
-              <Card.Text><span className="font-weight-bold">Format:</span> {currentCard.format}</Card.Text>
-              <Card.Text><span className="font-weight-bold">Country:</span> {currentCard.country}</Card.Text>
-              <Card.Text><span className="font-weight-bold">Genre: </span> {currentCard.genre}</Card.Text>
-              <Card.Text><span className="font-weight-bold">Style</span>{currentCard.style}</Card.Text>
+              <Card.Text>
+                <span className="font-weight-bold">Type: </span>
+                <span className="card-detail-desc">{currentCard.type}</span>
+              </Card.Text>
+              <Card.Text>
+                <span className="font-weight-bold">Label: </span>
+                {currentCard.label && currentCard.label.map(c => <span className="card-detail-desc">{c}</span>)}
+              </Card.Text>
+              <Card.Text>
+                <span className="font-weight-bold">Format: </span>
+                {currentCard.format && currentCard.format.map(c => <span className="card-detail-desc">{c}</span>)}
+              </Card.Text>
+              <Card.Text>
+                <span className="font-weight-bold">Country: </span>
+                <span className="card-detail-desc">{currentCard.country}</span>
+              </Card.Text>
+              <Card.Text><
+                span className="font-weight-bold">Genre: </span>
+                {currentCard.genre && currentCard.genre.map(c => <span className="card-detail-desc">{c}</span>)}
+              </Card.Text>
+              <Card.Text>
+                <span className="font-weight-bold">Style: </span>
+                {currentCard.style && currentCard.style.map(c => <span className="card-detail-desc">{c}</span>)}
+              </Card.Text>
             </Card.Body>
           </Card>
           <Card className="container-tracklist">
